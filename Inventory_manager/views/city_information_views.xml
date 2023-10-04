@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_bista_city_information_tree" model="ir.ui.view">
+        <field name="name">bista.city.information.tree</field>
+        <field name="model">bista.city.information</field>
+        <field name="arch" type="xml">
+            <tree string="Job Position">
+                <field name="id"/>
+                <field name="city_name"/>
+            </tree>
+        </field>
+    </record>
+    <record id="view_bista_city_information_form" model="ir.ui.view">
+        <field name="name">bista.city.information.form</field>
+        <field name="model">bista.city.information</field>
+        <field name="arch" type="xml">
+            <form string="Job Position">
+                <sheet>
+                    <group>
+                        <field name="city_name"/>
+                    </group>
+                    <group>
+                        <notebook>
+                            <page string="Employees list" name="employees_with_city">
+                                <field name="employee_ids">
+                                    <tree>
+                                        <field name="employee_id"/>
+                                        <field name="name"/>
+                                        <field name="phone_no"/>
+                                        <field name="email_address"/>
+                                    </tree>
+                                    <form>
+                                        <field name="employee_id"/>
+                                        <field name="name"/>
+                                        <field name="phone_no"/>
+                                        <field name="email_address"/>
+                                        <field name="joining_date"/>
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!-- action for the manu -->
+    <record id="action_bista_city_information_list" model="ir.actions.act_window">
+        <field name="name">City Information List</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">bista.city.information</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <!-- shows in manu -->
+    <menuitem
+        id= "menu_bista_employee_module_city_information_list"
+        name = "City Information"
+        parent="menu_bista_employee_module"
+        action="action_bista_city_information_list"
+        sequence="4"
+    />
+
+</odoo>

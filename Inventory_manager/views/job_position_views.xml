@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_bista_employee_job_position_tree" model="ir.ui.view">
+        <field name="name">bista.employee.job.position.tree</field>
+        <field name="model">bista.job.position</field>
+        <field name="arch" type="xml">
+            <tree string="Job Position">
+                <field name="id"/>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_bista_employee_job_position_form" model="ir.ui.view">
+        <field name="name">bista.employee.job.position.form</field>
+        <field name="model">bista.job.position</field>
+        <field name="arch" type="xml">
+            <form string="Job Position">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                    <!-- to create page we need notebook tag -->
+                    <notebook>
+                        <!-- page shows as a tab, page name isn't mandatory but better to use and keep uniqe -->
+                        <page string="Employee List" name='employee_list'>
+                            <!-- enclose the tree/form with the field to design the tree/form belongs to that field -->
+                            <field name="employee_ids">
+                                <!-- editable = top will let us edit from inline list -->
+                                <tree editable="top">
+                                    <field name="employee_id"/>
+                                    <field name="name"/>
+                                    <field name="joining_date"/>
+                                </tree>
+                                <form>
+                                    <sheet>
+                                        <!-- group make div, use string= to create group label -->
+                                        <group>
+                                            <field name="employee_id"/>
+                                            <field name="name"/>
+                                            <field name="joining_date"/>
+                                        </group>
+                                    </sheet>
+                                </form>
+                            </field>
+                        </page>
+                        <page string="Other Info" name="other">
+                            <group>
+                                <field name="id"/>
+                                <field name="create_uid"/>
+                                <field name="create_date"/>
+                            </group>
+                        </page>
+                    </notebook>
+
+                    <!-- <group>
+                        <field name="employee_ids">
+                            <tree>
+                                <field name="employee_id"/>
+                                <field name="name"/>
+                                <field name="joining_date"/>
+                            </tree>
+                            <form>
+                                <sheet>
+                                    <group>
+                                        <field name="employee_id"/>
+                                        <field name="name"/>
+                                        <field name="joining_date"/>
+                                    </group>
+                                </sheet>
+                            </form>
+                        </field>
+                    </group> -->
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- popup, wizard view >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+    <!-- add this id as view_id in bista_employee module view_job_psition_detail function -->
+    <record id="view_bista_employee_job_position_form_simple" model="ir.ui.view">
+        <field name="name">bista.employee.job.position.form.simple</field>
+        <field name="model">bista.job.position</field>
+        <field name="arch" type="xml">
+            <form string="Job Position">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                    <!-- to create page we need notebook tag -->
+                    <notebook>
+                        <!-- page shows as a tab, page name isn't mandatory but better to use and keep uniqe -->
+                        <page string="Employee List" name='employee_list'>
+                            <!-- enclose the tree/form with the field to design the tree/form belongs to that field -->
+                            <field name="employee_ids">
+                                <!-- editable = top will let us edit from inline list -->
+                                <tree editable="top">
+                                    <field name="employee_id"/>
+                                    <field name="name"/>
+                                    <field name="joining_date"/>
+                                </tree>
+                                <form>
+                                    <sheet>
+                                        <!-- group make div, use string= to create group label -->
+                                        <group>
+                                            <field name="employee_id"/>
+                                            <field name="name"/>
+                                            <field name="joining_date"/>
+                                        </group>
+                                    </sheet>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <!-- button for popup footer -->
+                <footer>
+                    <button string="Cancel" class="btn btn-danger" special='cancel'/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+
+
+    <record id="action_bista_employee_job_position_list" model="ir.actions.act_window">
+        <field name="name">Job Position List</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">bista.job.position</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem
+        id= "menu_bista_employee_module_job_position_list"
+        name = "Job Position(s)"
+        parent="menu_bista_employee_module"
+        action="action_bista_employee_job_position_list"
+        sequence="2"
+    />
+
+</odoo>

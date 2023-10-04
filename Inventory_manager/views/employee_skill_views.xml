@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_bista_employee_skill_tree" model="ir.ui.view">
+        <field name="name">bista.employee.skill.tree</field>
+        <field name="model">bista.employee.skill</field>
+        <field name="arch" type="xml">
+            <tree string="Job Position">
+                <field name="id"/>
+                <field name="name"/>
+                <field name="skill_type"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_bista_employee_skill_form" model="ir.ui.view">
+        <field name="name">bista.employee.skill.form</field>
+        <field name="model">bista.employee.skill</field>
+        <field name="arch" type="xml">
+            <form string="Job Position">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="skill_type"/>
+                        <!-- Reverse many2many field -->
+                        <field name="employee_ids">
+                            <tree editable="top">
+                                <field name="employee_id"/>
+                                <field name="name"/>
+                                <field name="joining_date"/>
+                            </tree>
+                        </field>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!-- action for the manu -->
+    <record id="action_bista_employee_skill_list" model="ir.actions.act_window">
+        <field name="name">Employee Skill List</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">bista.employee.skill</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <!-- shows in manu -->
+    <menuitem
+        id= "menu_bista_employee_module_employee_skill_list"
+        name = "Employee Skill"
+        parent="menu_bista_employee_module"
+        action="action_bista_employee_skill_list"
+        sequence="3"
+    />
+
+</odoo>

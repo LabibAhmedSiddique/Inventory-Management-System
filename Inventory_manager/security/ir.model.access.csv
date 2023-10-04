@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_bista_employee,bista.employee,model_bista_employee,,1,1,1,1
+access_bista_job_position,bista.job.position,model_bista_job_position,,1,1,1,1
+access_bista_employee_skill,bista.employee.skill,model_bista_employee_skill,,1,1,1,1
+access_bista_employee_education,bista.employee.education,model_bista_employee_education,,1,1,1,1
+access_bista_city_information,bista.city.information,model_bista_city_information,,1,1,1,1

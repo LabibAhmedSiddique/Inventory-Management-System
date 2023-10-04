@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <!-- Menu/Butoon ===> Action ====> View -->
+        <record id="view_bista_employee_tree" model="ir.ui.view">
+            <field name="name">bista.employee.tree</field>
+            <field name="model">bista.employee</field>
+            <field name="arch" type="xml">
+                <tree string="Employee">
+                    <field name="employee_id"/>
+                    <field name="name"/>
+                    <!-- <field name="employee_photos" widget = "image"/> -->
+                    <field name="job_position_id"/>
+                    <field name="joining_date"/>
+                    <field name="email_address"/>
+                    <field name="phone_no"/>
+                    <field name="on_leave"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="view_bista_employee_form" model="ir.ui.view">
+            <field name="name">bista.employee.form</field>
+            <field name="model">bista.employee</field>
+            <field name="arch" type="xml">
+                <form string="Employee">
+                    <header>
+                        <!-- string means button name, name means function name -->
+                        <button string="Compute Salary" type="object" name="compute_total_salary_in_employee_form" class="btn btn-primary"/>
+                        <button string="Write My Value" type="object" name="write_my_value" class="btn btn-primary"/>
+                        <button string="View information" type="object" name="see_info_of_employee_assingment" class="btn btn-info"/>
+                        <button string="Available Senior Developer" type="object" name="find_senior_dev" class="btn btn-secondary"/>
+                        <button string="View JOb Positions" type="object" name="view_job_psition_detail" class="btn btn-primary"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="employee_photos" filename="employee_photos_name" widget="image"/>
+                        </group>                        
+                        <group>
+                            <group string="Basic INFO">
+                                <field name="first_name" required="1"/>
+                                <field name="last_name"  required="1"/>
+                                <field name="name"  readonly="1"/>
+                                <field name="employee_id"/>
+                                <field name="job_position_id"/>
+                                <field name="date_of_birth"/>
+                                <field name="phone_no"/>
+                                <field name="email_address"/>
+                                <!-- <field name="employee_age"/>
+                                <field name="gender"/>
+                                <field name="employee_nationality"/>
+                                <field name="employee_religion"/>
+                                <field name="employee_education_ids" widget="many2many_tags"/>
+                                <field name="employee_last_degree"/> -->
+                            </group>
+                            <!-- <group string="Official INFO">
+                                <field name="employee_id"/>
+                                <field name="job_position_id"/>
+                                <field name="job_position_ids" widget="many2many_tags"/>
+                                <field name="employee_designation"/>
+                                <field name="employee_skill_ids" widget="many2many_tags"/>
+                                <field name="total_experience"/>
+                                <field name="joining_date"/>
+                                <field name="on_leave"/>
+                                <field name="is_remote"/>
+                                <field name="payment_ammount"/>
+                                <field name="comment_about_employee"/>
+                            </group> -->
+                            <!-- <group string="Contact INFO">
+                                <field name="present_address"/>
+                                <field name="phone_no"/>
+                                <field name="email_address"/>
+                            </group> -->
+                            <!-- <group string="Assignement">
+                                <field name="assigned_task"/>
+                                <field name="assigned_task_time"/>
+                                <field name="task_deadline"/>
+                                <field name="task_time_given"/>
+                                <field name="task_time"/>
+                                <field name="assigned_supervisor"/>
+                            </group> -->
+                            <!-- <group string="Documents">
+                                <field name="nid_scan"/>
+                                <field name="contract_letter"/>
+                            </group> -->
+                        </group>
+                        <notebook>
+                            <page string="Official INFO" name="employee_official_info">                                
+                                <group>
+                                    <group string="Job Details">
+                                        <field name="employee_id"/>
+                                        <!-- attrs setup Dyanamic Attribute. change field Attribute depand on logic. In attrs Dict every key means an Attribute -->
+                                        <!-- we can add multiple domain inside the list for a key -->
+                                        <field name="job_position_id"  attrs="{'required':[('employee_id','not in', ['', False])],}"/>
+                                        <field name="job_position_ids" widget="many2many_tags"/>
+                                        <field name="employee_designation"/>
+                                        <field name="employee_skill_ids" widget="many2many_tags"/>
+                                        <!-- if employee_id == 111 then make total_experience required -->
+                                        <field name="total_experience" attrs="{'required':[('employee_id','=','111')]}"/>
+                                        <!-- makes field invisible -->
+                                        <field name="joining_date"  attrs="{'invisible':[('employee_id','=','111')]}"/>
+                                        <field name="on_leave"/>
+                                        <field name="is_remote"/>
+                                        <field name="payment_ammount"/>
+                                        <field name="comment_about_employee"/>
+                                    </group>
+                                    <group string="Assignement">
+                                        <field name="assigned_task"/>
+                                        <field name="assigned_task_time"/>
+                                        <field name="task_deadline"/>
+                                        <field name="task_time_given"/>
+                                        <field name="task_time"/>
+                                        <field name="assigned_supervisor"/>
+                                    </group>
+                                </group>                                
+                            </page>
+                            <page string="Employee Details" name="employee_info_details">
+                                <group>
+                                    <group string="Present Address">
+                                        <field name="employee_city_address_id"/>
+                                        <field name="present_address"/>                                        
+                                    </group>
+                                    <group>
+                                        <field name="employee_age"/>
+                                        <field name="gender"/>
+                                        <field name="employee_nationality"/>
+                                        <field name="employee_religion"/>
+                                        <field name="employee_education_ids" widget="many2many_tags"/>
+                                        <field name="employee_last_degree"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Documents" name="employee_documents">
+                                <group>
+                                    <field name="nid_scan"/>
+                                    <field name="contract_letter"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Search, filter, Group By -->
+        <record id="view_bista_employee_search" model="ir.ui.view">
+            <field name="name">bista.employee.search</field>
+            <field name="model">bista.employee</field>
+            <field name="arch" type="xml">
+                <search string="Employee">
+                    <field name="employee_id"/>
+                    <field name="name"/>
+                    <field name="email_address"/>
+                    <field name="phone_no"/>
+                    <!-- filter -->
+                    <separator string="Number"/>
+                    <filter name="phone_bd" string="Bangladeshi Number" domain="[('phone_no','ilike','+88')]"/>
+                    <separator string="Mail"/>
+                    <filter name="mail_gmail" string="Gmail" domain="[('email_address','ilike','gmail')]"/>
+                    <!-- Group By -->
+                    <group expand = "1" string="Group By">
+                        <filter name="mail_group" string="Gmail" context="{'group_by':'email_address'}"/>
+                        <filter name="designation_group" string="Designation" context="{'group_by':'employee_designation'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_bista_employee_list" model="ir.actions.act_window">
+            <field name="name">Employee List</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">bista.employee</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <!-- <field name="domain">[('email_address','ilike','gmail')]</field> -->
+            <!--set search default -->
+            <field name ="context">{'search_default_mail_gmail':1}</field>
+        </record>
+
+        <menuitem 
+            id="menu_bista_employee_module"
+            name="Bista Employee"
+            sequence="1"/>
+        
+        <menuitem 
+            id="menu_bista_employee_module_employee_list"
+            name="Employee(s)"
+            parent="menu_bista_employee_module"
+            action="action_bista_employee_list"
+            sequence="1"/>
+        
+
+</odoo>

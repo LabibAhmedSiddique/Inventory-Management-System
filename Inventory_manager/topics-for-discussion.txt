@@ -1,0 +1,19 @@
+10/10/22
+==========
+1. Dynamic attribute handling 
+2. Relational data analysis
+3. wizard / popup
+
+
+17/10/22
+Inheritence.
+
+
+Next Topics.
+Report Inheritence
+
+
+
+
+
+Wizard with Trainsient Model ( with Report )
